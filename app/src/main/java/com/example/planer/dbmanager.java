@@ -79,6 +79,14 @@ public class dbmanager extends SQLiteOpenHelper {
             return -1;
         }
         else{
+//            Cursor cursor = db.query("users",  // Имя таблицы
+//                    new String[] {COLUMN_ID}, // Имена столбцов (в данном случае, user_id)
+//                    "email = ?",  // Условие для запроса (например, по имени пользователя)
+//                    new String[] {email}, // Значение для условия
+//                    null, null, null);
+//            int userId = cursor.getInt(0);
+//            cursor.close();
+//            db.close();
             return 0;
         }
     }

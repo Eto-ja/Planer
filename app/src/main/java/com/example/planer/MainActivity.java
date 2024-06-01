@@ -24,6 +24,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton btn_house, btn_calendar, btn_grafic;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     public CalendarFragment calendarFragment = new CalendarFragment();
     public HouseFragment houseFragment = new HouseFragment();
     public GrafFragment grafFragment = new GrafFragment();
+
+    private FloatingActionButton btn_add;
 
 
     @Override
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         btn_house = findViewById(R.id.btn_house);
         btn_calendar = findViewById(R.id.btn_calendar);
         btn_grafic = findViewById(R.id.btn_grafic);
+        btn_add = findViewById(R.id.btn_add);
 
         txtvw_title = findViewById(R.id.txtvw_title);
         textView = findViewById(R.id.textView);
@@ -151,4 +156,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void add_task(View view) {
+        startActivity(new Intent(this, TaskActivity.class));
+    }
 }
