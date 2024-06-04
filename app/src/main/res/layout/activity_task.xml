@@ -5,7 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TaskActivity">
+    tools:context=".TaskActivity"
+    android:background="@color/white">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cloud_no"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_title"
@@ -37,10 +45,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Описание к задаче"
-        android:lines="5"
         android:gravity="start|top"
+        android:hint="Описание к задаче"
         android:inputType="textMultiLine"
+        android:lines="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_name" />
@@ -50,15 +58,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:checkedButton="@id/radio_case"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:checkedButton="@id/radio_case"
         app:layout_constraintTop_toBottomOf="@+id/text_description">
-        <RadioButton android:id="@+id/radio_case"
+
+        <RadioButton
+            android:id="@+id/radio_case"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Задача" />
-        <RadioButton android:id="@+id/radio_target"
+
+        <RadioButton
+            android:id="@+id/radio_target"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Цель / привычка" />
@@ -93,8 +105,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
-        android:text="Готово"
         android:onClick="addDb"
+        android:text="Готово"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
@@ -104,8 +116,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="25dp"
-        android:text="Назад"
         android:onClick="back"
+        android:text="Назад"
         app:layout_constraintEnd_toStartOf="@+id/btn_do"
         app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 </androidx.constraintlayout.widget.ConstraintLayout>

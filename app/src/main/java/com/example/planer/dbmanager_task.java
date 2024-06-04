@@ -9,6 +9,9 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class dbmanager_task extends SQLiteOpenHelper {
     private static final String DBNAME = "users_planer.db";
     static final String COLUMN_ID = "taskId";
@@ -64,5 +67,91 @@ public class dbmanager_task extends SQLiteOpenHelper {
         else{
             return 0;
         }
+    }
+
+    protected List<String> show_tasks(String email){
+        Cursor c = null;
+        SQLiteDatabase db = this.getWritableDatabase();
+        c = db.query("tasks", new String[] { COLUMN_TITLE },
+                "email = ? and type = ?",
+                new String[] { email, "Задача" }, null, null, null);
+        List<String> titles = new ArrayList<>();
+        if (c.moveToFirst()) {
+            do {
+                int index = c.getColumnIndex(COLUMN_TITLE);
+                String title1 = c.getString(index);
+                titles.add(title1);
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return titles;
+    }
+
+    protected List<String> show_targets(String email){
+        Cursor c = null;
+        SQLiteDatabase db = this.getWritableDatabase();
+        c = db.query("tasks", new String[] { COLUMN_TITLE },
+                "email = ? and type = ?",
+                new String[] { email, "Цель / привычка" }, null, null, null);
+        List<String> titles = new ArrayList<>();
+        if (c.moveToFirst()) {
+            do {
+                int index = c.getColumnIndex(COLUMN_TITLE);
+                String title1 = c.getString(index);
+                titles.add(title1);
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return titles;
+    }
+
+    protected List<String> show_date(String email, String date){
+        Cursor c = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        c = db.query("tasks", new String[] { COLUMN_TITLE },
+                "email = ? and type = ? and stop = ?",
+                new String[] { email, "Задача", date}, null, null, null);
+        List<String> titles = new ArrayList<>();
+        if (c.moveToFirst()) {
+            do {
+                String title = c.getString(c.getColumnIndexOrThrow(COLUMN_TITLE));
+                titles.add(title);
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return titles;
+    }
+
+    protected void del_task(String email, String title){
+        SQLiteDatabase db = getWritableDatabase();
+
+        long rowCount = db.delete("tasks", "email = ? and title = ?",
+                new String[] { email, title });
+
+        db.close();
+    }
+
+    protected String[] edit_task(String email, String title){
+        Cursor c = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        c = db.query("tasks", new String[] { COLUMN_TYPE, COLUMN_DESCRIPTION, COLUMN_STOP },
+                "email = ? and title = ?",
+                new String[] { email, title }, null, null, null);
+        String [] titles = new String[3];
+        if (c.moveToFirst()) {
+            String type = c.getString(c.getColumnIndexOrThrow(COLUMN_TYPE));
+            String description = c.getString(c.getColumnIndexOrThrow(COLUMN_DESCRIPTION));
+            if (description.equals("")){
+                description = "Описание к задаче";
+            }
+            String date = c.getString(c.getColumnIndexOrThrow(COLUMN_STOP));
+            titles = new String[] { type, description, date};
+        }
+        c.close();
+        db.close();
+        return titles;
     }
 }

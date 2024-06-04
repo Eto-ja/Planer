@@ -5,21 +5,48 @@
     android:layout_height="match_parent"
     tools:context=".HouseFragment">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="400dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/cloud_classic" />
+
     <TextView
+        android:id="@+id/text_task"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Твои задачки:"
-        android:textSize="30sp"
-        android:layout_marginTop="100dp"
-        android:layout_marginStart="50dp"/>
+        android:layout_marginHorizontal="160dp"
+        android:layout_marginTop="240dp"
+        android:text="Задачи"
+        android:textSize="24sp" />
 
 
     <ListView
         android:id="@+id/list_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="200dp"
-        android:layout_marginHorizontal="20dp"/>
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="290dp"
+        android:layout_marginBottom="30dp"
+        android:choiceMode="multipleChoice"/>
+
+    <TextView
+        android:id="@+id/text_target"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Привычки"
+        android:layout_marginHorizontal="140dp"
+        android:layout_marginTop="30dp"
+        android:textSize="24sp"/>
+
+    <ListView
+        android:id="@+id/list_target"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="400dp" />
 
 </FrameLayout>

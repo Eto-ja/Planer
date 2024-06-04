@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
 
         setNewFragment(houseFragment);
 
-//        dbmanager("add");
         SharedPreferences sp = getSharedPreferences("my_settings",
                 Context.MODE_PRIVATE);
 //        SharedPreferences.Editor start = sp.edit();
@@ -106,9 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (!hasVisited) {
             dbmanager("add");
-            // выводим нужную активность
             SharedPreferences.Editor e = sp.edit();
-            e.putBoolean("hasVisited", true);// не забудьте подтвердить изменения
+            e.putBoolean("hasVisited", true);
             e.commit();
         }
 
@@ -145,12 +143,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void showInfo(String text){
-        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
-    }
-
     public void dbmanager(String f){
-//        new dbmanager(this);
         if (f.equals("add")){
             startActivity(new Intent(this, DbdataActivity.class));
         }

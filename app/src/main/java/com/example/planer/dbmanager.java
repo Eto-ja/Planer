@@ -21,7 +21,7 @@ public class dbmanager extends SQLiteOpenHelper {
     static final String ELEMENTAL = "elemental";
 
     public dbmanager(@Nullable Context context) {
-        super(context, dbname, null, 1);
+        super(context, dbname, null, 5);
     }
 
     @Override
@@ -79,20 +79,11 @@ public class dbmanager extends SQLiteOpenHelper {
             return -1;
         }
         else{
-//            Cursor cursor = db.query("users",  // Имя таблицы
-//                    new String[] {COLUMN_ID}, // Имена столбцов (в данном случае, user_id)
-//                    "email = ?",  // Условие для запроса (например, по имени пользователя)
-//                    new String[] {email}, // Значение для условия
-//                    null, null, null);
-//            int userId = cursor.getInt(0);
-//            cursor.close();
-//            db.close();
             return 0;
         }
     }
 
     public int sign_in(String email, String password){
-        // переменные для query
         String[] columns = null;
         String selection = null;
         String[] selectionArgs = null;
@@ -100,7 +91,6 @@ public class dbmanager extends SQLiteOpenHelper {
         String having = null;
         String orderBy = null;
 
-        // курсор
         Cursor c = null;
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -118,16 +108,6 @@ public class dbmanager extends SQLiteOpenHelper {
             c.close();
             db.close();
             return 0;
-        }
-    }
-
-    public String fortune(String email){
-        String user = email;
-        if(email.equals("help")){
-            return user;
-        }
-        else{
-            return "ok";
         }
     }
 }

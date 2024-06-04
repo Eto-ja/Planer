@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -20,9 +21,6 @@ import androidx.core.view.WindowInsetsCompat;
 public class TaskActivity extends AppCompatActivity {
 
     private EditText text_name, text_description, text_date;
-    private CheckBox checkBox;
-
-    private String type = "Задача";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,21 +36,29 @@ public class TaskActivity extends AppCompatActivity {
         text_name = findViewById(R.id.text_name);
         text_description = findViewById(R.id.text_description);
         text_date = findViewById(R.id.text_date);
-
-        checkBox = findViewById(R.id.checkBox);
-
-        findViewById(R.id.radio_case).setOnClickListener(this::onRadioButtonClicked);
-//        findViewById(R.id.radio_target).setOnClickListener(this::onRadioButtonClicked);
     }
 
-    private void onRadioButtonClicked(View view) {
-        RadioButton radio = (RadioButton) view;
-        boolean checked = radio.isChecked();
-        if (checked){
-            type = "Задача";
+    public String onTypeClick(View view) {
+        RadioGroup radioGroup = findViewById(R.id.radiogroup_task);
+        int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
+
+        if (selectedRadioButtonId != -1) {
+            RadioButton selectedRadioButton = findViewById(selectedRadioButtonId);
+            String selectedValue = selectedRadioButton.getText().toString();
+            return selectedValue;
+        } else {
+            Toast.makeText(this, "Пожалуйста, выберите опцию", Toast.LENGTH_SHORT).show();
+            return "";
         }
-        else{
-            type = "Цель";
+    }
+
+    public String onDateClick(View view) {
+        CheckBox myCheckBox = findViewById(R.id.checkBox);
+
+        if (myCheckBox.isChecked()) {
+            return "Бессрочно";
+        } else {
+            return text_date.getText().toString();
         }
     }
 
@@ -64,10 +70,12 @@ public class TaskActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("my_settings",
                 Context.MODE_PRIVATE);
         String mail = sp.getString("email","вы не в аккаунте");
+        String type = onTypeClick(view);
+        String stop = onDateClick(view);
 
         dbmanager_task db = new dbmanager_task(this);
         int res = db.add(text_name.getText().toString(), text_description.getText().toString(),
-                text_name.getText().toString(), type, mail);
+                stop, type, mail);
 
         if (res == -1){
             Toast.makeText(this, "Произошла ошибка", Toast.LENGTH_LONG).show();

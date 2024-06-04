@@ -59,6 +59,7 @@ public class DbdataActivity extends AppCompatActivity {
             SharedPreferences.Editor e = sp.edit();
             String user = email.getText().toString();
             e.putString("email", user);
+            e.putString("count", "0");
             e.apply();
 
             Toast.makeText(this, "Регистрация прошла успешно", Toast.LENGTH_LONG).show();
